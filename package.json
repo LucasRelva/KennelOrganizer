@@ -5,6 +5,9 @@
   "repository": "https://github.com/LucasRelva/KennelOrganizer.git",
   "author": "LucasRelva && LeonardoPorto",
   "license": "MIT",
+  "scripts": {
+    "dev": "nodemon app/core/config/app.js"
+  },
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
