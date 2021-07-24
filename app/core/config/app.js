@@ -8,8 +8,6 @@ require('./dbconnection')
 const app = express()
 const server = require('http').createServer(app)
 
-// app.use(express.static("public"))
-// app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cors())
 
