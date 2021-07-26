@@ -5,7 +5,7 @@ class Dog extends Model {
         super.init({
             name: DataTypes.STRING,
             image: DataTypes.STRING,
-            weigth: DataTypes.FLOAT,
+            weight: DataTypes.FLOAT,
             age: DataTypes.INTEGER,
             behavior: DataTypes.STRING,
             entryDate: DataTypes.STRING,

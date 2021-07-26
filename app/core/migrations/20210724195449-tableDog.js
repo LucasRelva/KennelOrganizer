@@ -42,7 +42,7 @@ module.exports = {
         defaultValue: false
       },
       
-      entreDate:{
+      entryDate:{
         type: Sequelize.STRING,
         allowNull: false,
       },
