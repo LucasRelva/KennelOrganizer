@@ -10,6 +10,42 @@ module.exports = {
         autoIncrement: true,
         allowNull: false,
       },
+
+      name: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
+      image: {
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
+
+      weight: {
+        type: Sequelize.FLOAT,
+        allowNull: false,
+      },
+
+      age: {
+        type: Sequelize.INTEGER,
+        allowNull: false
+      },
+
+      behavior: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      isActive: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+      },
+      
+      entreDate:{
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+
       kennelId: {
         type: Sequelize.INTEGER,
         allowNull: true,
@@ -17,22 +53,12 @@ module.exports = {
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL'
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      isActive: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-      },
-      image: {
-        type: Sequelize.STRING,
-        allowNull: true,
-      },
+
       createdAt: {
         type: Sequelize.DATE,
         allowNull: false,
       },
+
       updatedAt: {
         type: Sequelize.DATE,
         allowNull: false,
