@@ -12,6 +12,6 @@ const routes = express.Router()
 routes.use('/dog', dogRoutes)
 
 //Kennel ROutes
-routes.use('/kennel', kennelRoutes)
+routes.use('/kennel', KennelRoutes)
 
 module.exports = routes
