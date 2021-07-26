@@ -29,6 +29,8 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
+        await dog.destroy({ where: { id: dogId } })
+
         return res.json(dog)
     },
 
@@ -40,14 +42,14 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
-        await Dog.update({ name }, { where: { id: dogID } })
+        await Dog.update({ name }, { where: { id: dogId } })
 
         return res.json(dog)
     },
 
     async updateDogWeight(req, res) {
         const { weight } = req.body
-        const dogId = req.params
+        const { dogId } = req.params
 
         const dog = await Dog.findByPk(dogId)
 
@@ -66,7 +68,7 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
-        await Dog.update({ age }, { where: { id: dogID } })
+        await Dog.update({ age }, { where: { id: dogId } })
 
         return res.json(dog)
     },
@@ -79,14 +81,14 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
-        await Dog.update({ image }, { where: { id: dogID } })
+        await Dog.update({ image }, { where: { id: dogId } })
 
         return res.json(dog)
     },
 
     async updateDogBehavior(req, res) {
         const { behavior } = req.body
-        const dogId = req.params
+        const { dogId } = req.params
 
         const dog = await Dog.findByPk(dogId)
 
@@ -105,13 +107,13 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
-        await Dog.update({ entryDate }, { where: { id: dogID } })
+        await Dog.update({ entryDate }, { where: { id: dogId } })
 
         return res.json(dog)
     },
 
     async listNoKennelDogs(req, res) {
-        const dogs = Dog.findAll({
+        const dogs = await Dog.findAll({
             where: {
                 inKennel: false
             }

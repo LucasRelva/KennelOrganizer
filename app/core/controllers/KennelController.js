@@ -2,13 +2,14 @@ const { Op, where } = require('sequelize')
 const Kennel = require('../models/Kennel')
 const Dog = require('../models/Dog')
 const { findAll } = require('../models/Kennel')
-const { updateInKennel } = require('../controllers/GeneralController')
+const GeneralController = require('../controllers/GeneralController')
+
 
 module.exports = {
     async createKennel(req, res) {
         const { name } = req.body
 
-        const kennel = await Kennel.create({ name })
+        const kennel = await Kennel.create({ name, isActive: true })
 
         if (!kennel) return res.status(500).json({ error: 'Kennel was not created properly' })
 
@@ -47,7 +48,7 @@ module.exports = {
 
         if (!kennel) return res.status(204).json({ error: 'kennel not existing' })
 
-        const dogs = await Kennel.getDogs()
+        const dogs = await kennel.getDogs()
 
         for (dog of dogs) {
             updateInKennel(dog.id)
@@ -55,7 +56,7 @@ module.exports = {
 
         await kennel.setDogs([])
 
-        await Kennel.destroy({ where: { id: KennelId } })
+        await Kennel.destroy({ where: { id: kennelId } })
 
         return res.json(kennel)
 
@@ -64,12 +65,7 @@ module.exports = {
     async listDogs(req, res) {
         const { kennelId } = req.params
 
-        const kennel = await findAll({
-            where: {
-                kennelId: kennelId
-            }
-        }
-        )
+        const kennel = await Kennel.findByPk(kennelId)
 
         if (!kennel) return res.status(204).json({ error: 'kennel not existing' })
 
@@ -87,11 +83,14 @@ module.exports = {
         const dog = await Dog.findByPk(dogId)
         const kennel = await Kennel.findByPk(kennelId)
 
-        if (!dog || !kennel) return res.status(404).json({ erro: 'not found' })
+        console.log("---------------------" + dog, kennel);
+
+        if (!dog || !kennel) return res.status(204).json({ erro: 'not found' })
+
 
         await kennel.addDog(dog)
 
-        updateInKennel(dogId)
+        GeneralController.updateInKannel(dogId)
 
         return res.json(kennel)
     },
@@ -106,7 +105,7 @@ module.exports = {
 
         await kennel.removeDog(dog)
 
-        updateInKennel(dogId)
+        GeneralController.updateInKannel(dogId)
 
         return res.json(kennel)
     }
