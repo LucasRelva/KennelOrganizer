@@ -12,7 +12,7 @@ class Kennel extends Model {
     }
 
     static associate(models) {
-        this.hasMany(models.Dog, { foreignKey: 'kennelId', as: 'Kennel' })
+        this.hasMany(models.Dog, { foreignKey: 'kennelId', as: 'Dogs' })
     }
 }
 
