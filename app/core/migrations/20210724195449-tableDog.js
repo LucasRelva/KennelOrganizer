@@ -36,9 +36,10 @@ module.exports = {
         allowNull: false
       },
 
-      isActive: {
+      inKennel: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: false
       },
       
       entreDate:{
@@ -51,7 +52,8 @@ module.exports = {
         allowNull: true,
         references: {model: 'kennels', key: 'id'},
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL'
+        onDelete: 'SET NULL',
+        defaultValue: null
       },
 
       createdAt: {
