@@ -5,6 +5,10 @@ class Dog extends Model {
         super.init({
             name: DataTypes.STRING,
             image: DataTypes.STRING,
+            weigth: DataTypes.FLOAT,
+            age: DataTypes.INTEGER,
+            behavior: DataTypes.STRING,
+            entryDate: DataTypes.STRING,
             isActive: DataTypes.BOOLEAN,
         }, {
             sequelize,
