@@ -108,5 +108,31 @@ module.exports = {
         GeneralController.updateInKannel(dogId)
 
         return res.json(kennel)
+    },
+
+    async updateKennelName(req, res) {
+        const { kennelId } = req.params
+        const { name } = req.body
+
+        const kennel = await Kennel.findByPk(kennelId)
+
+        if (!kennel) return res.status(204).json({ error: 'No kennl was found with the id: ' + kennelId })
+
+        await Kennel.update({ name }, { where: { id: kennelId } })
+
+        return res.json(kennel)
+    },
+
+    async countDogs(req, res) {
+        const { kennelId } = req.params
+
+        const kennel = await Kennel.findByPk(kennelId)
+
+        if (!kennel) return res.status(204).json({ error: 'No kennl was found with the id: ' + kennelId })
+
+        const dogsCount = await kennel.countDogs()
+
+        return res.json(dogsCount)
+
     }
 }

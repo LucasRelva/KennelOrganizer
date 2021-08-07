@@ -34,84 +34,6 @@ module.exports = {
         return res.json(dog)
     },
 
-    async updateDogName(req, res) {
-        const { dogId } = req.params
-        const { name } = req.body
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
-
-        await Dog.update({ name }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
-    async updateDogWeight(req, res) {
-        const { weight } = req.body
-        const { dogId } = req.params
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + taskId })
-
-        await Dog.update({ weight }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
-    async updateDogAge(req, res) {
-        const { dogId } = req.params
-        const { age } = req.body
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
-
-        await Dog.update({ age }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
-    async updateDogImage(req, res) {
-        const { dogId } = req.params
-        const { image } = req.body
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
-
-        await Dog.update({ image }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
-    async updateDogBehavior(req, res) {
-        const { behavior } = req.body
-        const { dogId } = req.params
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
-
-        await Dog.update({ behavior }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
-    async updateDogEntryDate(req, res) {
-        const { dogId } = req.params
-        const { entryDate } = req.body
-
-        const dog = await Dog.findByPk(dogId)
-
-        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
-
-        await Dog.update({ entryDate }, { where: { id: dogId } })
-
-        return res.json(dog)
-    },
-
     async listNoKennelDogs(req, res) {
         const dogs = await Dog.findAll({
             where: {
@@ -167,5 +89,18 @@ module.exports = {
 
         return res.json({ kennelName: kennelName })
 
+    },
+
+    async updateDogInfo(req, res) {
+        const { dogId } = req.params
+        const { entryDate, name, image, weight, age, behavior, } = req.body
+
+        const dog = await Dog.findByPk(dogId)
+
+        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
+
+        await Dog.update({ behavior, entryDate, name, image, weight, age }, { where: { id: dogId } })
+
+        return res.json(dog)
     }
 }
