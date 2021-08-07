@@ -12,7 +12,10 @@
     "axios": "^0.21.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "jquery-mask-plugin": "^1.14.16",
+    "multer": "^1.4.2",
     "mysql2": "^2.2.5",
+    "nunjucks": "^3.2.3",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
