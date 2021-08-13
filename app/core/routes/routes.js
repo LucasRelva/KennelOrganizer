@@ -20,20 +20,19 @@ routes.use('/kennel', KennelRoutes)
 routes.post('/upload', upload.single('photo'), async (req, res) => {
     const file = req.file
     sharp.cache(false)
+    console.log(req)
 
     const [type, extension] = file.mimetype.split('/')
-
-    if (!fs.existsSync(file.destination)) {
-        fs.mkdirSync(file.destination)
-    }
+    const finalPath = `${file.destination}/${Date.now()}-resized.${extension}`
 
     await sharp(file.path).resize(320, 320, {
         fit: 'contain'
-    }).toFile(`${file.destination}/${Date.now()}-resized.${extension}`)
+    }).toFile(finalPath)
 
     fs.unlinkSync(file.path)
 
-    res.send('deu bom')
+
+    return res.json(req.body)
 })
 
 module.exports = routes

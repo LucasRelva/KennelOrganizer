@@ -20,7 +20,7 @@ nunjucks.configure(path.join(__dirname + '..', '..', '..', 'views'), {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname + '..', '..', '..', '..', 'assets', 'images'))
+        cb(null, path.join(__dirname + '..', '..', '..', '..', 'images'))
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + '-' + file.originalname)
