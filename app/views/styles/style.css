@@ -113,3 +113,9 @@ label#value-error{
 label#type-error{
     display: none !important;
 }
+
+#upload-photo {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }
