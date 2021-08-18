@@ -13,9 +13,9 @@ module.exports = {
         sharp.cache(false)
 
         const [type, extension] = file.mimetype.split('/')
-        const image = `${file.destination}/${Date.now()}-resized.${extension}`
+        const image = `${Date.now()}-resized.${extension}`
 
-        await sharp(file.path).resize(600, 600, {
+        await sharp(file.path).resize(400, 400, {
             fit: 'contain'
         }).toFile(image)
 
@@ -107,7 +107,7 @@ module.exports = {
 
     async updateDogInfo(req, res) {
         const { dogId } = req.params
-        const { entryDate, name, image, weight, age, behavior, } = req.body
+        const { entryDate, name, weight, age, behavior, } = req.body
 
         const dog = await Dog.findByPk(dogId)
 
