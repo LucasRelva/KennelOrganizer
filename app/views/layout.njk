@@ -20,7 +20,10 @@
             {% block content %}{% endblock content %}
         </div>
 
-        {% block modal %}{% endblock modal %}
+        {% block modal %}
+            {%include "partials/dogsModal.njk"%}
+            {%include "partials/kennelsModal.njk"%}
+        {% endblock modal %}
 
         {# bootstrap script #}
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -31,6 +34,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
         {# front-end script #}
         <script src="scripts/main.js"></script>
+        {# axios #}
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
         {% block scripts %}{% endblock scripts %}
     </body>

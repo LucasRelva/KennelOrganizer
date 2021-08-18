@@ -6,18 +6,13 @@
     {%include "partials/header.njk"%}
 
     <div style="display: flex; flex-wrap: wrap; margin: 0 auto; justify-content: center; " >
-        <div class="card text-white bg-dark " style="max-width: 18rem; margin: 10px; min-width: 18rem;">
+        <div class="card text-center text-white bg-dark " style="max-width: 18rem; margin: 10px; min-width: 18rem;">
             <div class="card-header" style="font-size: 25px">Nome Canil</div>
             <div class="card-body">
                 <h5 class="card-title" style="font-size: 20px">
                     <b> 15 </b>Cachorros 
                 </h5>
-                <p class="card-text">Clique para ver mais</p>
-            </div>
+            <a href="#" class="btn btn-primary">Ver canil</a>           
         </div>
     </div>
 {% endblock content %}
-
-{% block modal %}
-    {%include "partials/dogsModal.njk"%}
-{% endblock modal %}
