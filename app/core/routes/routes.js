@@ -16,23 +16,23 @@ routes.use('/dog', dogRoutes)
 //Kennel ROutes
 routes.use('/kennel', KennelRoutes)
 
-//upload images
-routes.post('/upload', upload.single('photo'), async (req, res) => {
-    const file = req.file
-    sharp.cache(false)
-    console.log(req)
+// //upload images
+// routes.post('/upload', upload.single('photo'), async (req, res) => {
+//     const file = req.file
+//     sharp.cache(false)
+//     console.log(req)
 
-    const [type, extension] = file.mimetype.split('/')
-    const finalPath = `${file.destination}/${Date.now()}-resized.${extension}`
+//     const [type, extension] = file.mimetype.split('/')
+//     const finalPath = `${file.destination}/${Date.now()}-resized.${extension}`
 
-    await sharp(file.path).resize(320, 320, {
-        fit: 'contain'
-    }).toFile(finalPath)
+//     await sharp(file.path).resize(320, 320, {
+//         fit: 'contain'
+//     }).toFile(finalPath)
 
-    fs.unlinkSync(file.path)
+//     fs.unlinkSync(file.path)
 
 
-    return res.json(req.body)
-})
+//     return res.json(req.body)
+// })
 
 module.exports = routes

@@ -1,4 +1,5 @@
 const express = require('express')
+const upload = require('../config/app')
 const DogController = require('../controllers/DogController')
 
 const dogRoutes = express.Router()
@@ -10,6 +11,6 @@ dogRoutes.get('/kennel/:dogId', DogController.getKennel)
 dogRoutes.delete('/:dogId', DogController.deleteDog)
 dogRoutes.put('/:dogId', DogController.updateDogInfo)
 dogRoutes.put('/:dogId/:kennelId', DogController.updateKennel)
-dogRoutes.post('/', DogController.createDog)
+dogRoutes.post('/', upload.single('image'), DogController.createDog)
 
 module.exports = dogRoutes

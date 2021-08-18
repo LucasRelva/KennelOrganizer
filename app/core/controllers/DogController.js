@@ -2,10 +2,24 @@ const { update } = require('../models/Dog')
 const { Op } = require('sequelize')
 const Dog = require('../models/Dog')
 const Kennel = require('../models/Kennel')
+const sharp = require('sharp')
+const fs = require('fs')
 
 module.exports = {
     async createDog(req, res) {
-        const { name, image, weight, age, behavior, entryDate } = req.body
+        const { name, weight, age, behavior, entryDate } = req.body
+        const file = req.file
+
+        sharp.cache(false)
+
+        const [type, extension] = file.mimetype.split('/')
+        const image = `${file.destination}/${Date.now()}-resized.${extension}`
+
+        await sharp(file.path).resize(600, 600, {
+            fit: 'contain'
+        }).toFile(image)
+
+        fs.unlinkSync(file.path)
 
         const dog = await Dog.create({ name, image, weight, age, behavior, entryDate })
 
