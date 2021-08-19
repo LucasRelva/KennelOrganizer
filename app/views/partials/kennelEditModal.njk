@@ -1,0 +1,46 @@
+<div class="modal fade" id="kennelModalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastrar novo canil</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="needs-validation kennelFormEdit" id="kennelFormEdit" novalidate id="form" action="/kennel" method="post" enctype="multipart/form-data">
+
+                    <div class="form-group ">
+                        <label for="name">Nome:</label>
+                        <div class="icon-input">
+                            <div class="name-icon icon-background">
+                                <img src="https://img.icons8.com/ios-glyphs/30/000000/dog-house.png"/>
+                            </div>
+                            <div class="input-verify">
+                                <input type="text" class="form-control" id="name" required placeholder="Nome" name="name">
+                                <div class="valid-feedback">
+                                    Tudo certo por aqui!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Digite um nome ao cannil.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="" style="text-align: right;">
+                        <button class="btn btn-success ml-6" type="submit">Cadastrar</button>
+
+                    </div>
+                    
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+    <script src="scripts/kennel.js"></script>
+{% endblock scripts %}
