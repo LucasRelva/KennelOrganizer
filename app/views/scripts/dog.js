@@ -1,5 +1,6 @@
-const dogForm = document.querySelector('.dogForm')
-const imageFile = document.querySelector('#upload-photo')
+var dogForm = document.querySelector('.dogForm')
+var imageFile = document.querySelector('#upload-photo')
+var dogsGroup = document.querySelector('#dogsGroup')
 
 dogForm.addEventListener('submit', event => {
     event.preventDefault()

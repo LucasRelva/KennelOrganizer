@@ -23,6 +23,7 @@
         {% block modal %}
             {%include "partials/dogsModal.njk"%}
             {%include "partials/kennelsModal.njk"%}
+            {%include "partials/kennelEditModal.njk"%}
         {% endblock modal %}
 
         {# bootstrap script #}
@@ -32,12 +33,13 @@
         {# jquery mask script #}
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
-        {# front-end script #}
-        <script src="scripts/main.js"></script>
         {# axios #}
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        {# front-end script #}
+        <script src="scripts/main.js"></script>
 
         {% block scripts %}{% endblock scripts %}
+        
     </body>
 
 </html>

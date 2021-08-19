@@ -116,7 +116,7 @@ module.exports = {
 
         const kennel = await Kennel.findByPk(kennelId)
 
-        if (!kennel) return res.status(204).json({ error: 'No kennl was found with the id: ' + kennelId })
+        if (!kennel) return res.status(204).json({ error: 'No kennel was found with the id: ' + kennelId })
 
         await Kennel.update({ name }, { where: { id: kennelId } })
 
@@ -128,7 +128,7 @@ module.exports = {
 
         const kennel = await Kennel.findByPk(kennelId)
 
-        if (!kennel) return res.status(204).json({ error: 'No kennl was found with the id: ' + kennelId })
+        if (!kennel) return res.status(204).json({ error: 'No kennel was found with the id: ' + kennelId })
 
         const dogsCount = await kennel.countDogs()
 
