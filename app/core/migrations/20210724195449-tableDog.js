@@ -36,13 +36,7 @@ module.exports = {
         allowNull: false
       },
 
-      inKennel: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
-        defaultValue: false
-      },
-      
-      entryDate:{
+      entryDate: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -50,7 +44,7 @@ module.exports = {
       kennelId: {
         type: Sequelize.INTEGER,
         allowNull: true,
-        references: {model: 'kennels', key: 'id'},
+        references: { model: 'kennels', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'SET NULL',
         defaultValue: null

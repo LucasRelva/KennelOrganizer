@@ -27,7 +27,6 @@ const storage = multer.diskStorage({
     }
 })
 
-console.log('----------------------------' + path.join(__dirname + '..', '..', '..', 'views', 'images'));
 
 const upload = multer({ storage })
 

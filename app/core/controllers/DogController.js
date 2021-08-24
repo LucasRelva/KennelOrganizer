@@ -52,7 +52,7 @@ module.exports = {
     async listNoKennelDogs(req, res) {
         const dogs = await Dog.findAll({
             where: {
-                inKennel: false
+                kennelId: null
             }
         })
 

@@ -9,7 +9,6 @@ class Dog extends Model {
             age: DataTypes.INTEGER,
             behavior: DataTypes.STRING,
             entryDate: DataTypes.STRING,
-            inKennel: DataTypes.BOOLEAN,
         }, {
             sequelize,
             tableName: 'dogs'

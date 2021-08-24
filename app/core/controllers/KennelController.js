@@ -48,14 +48,6 @@ module.exports = {
 
         if (!kennel) return res.status(204).json({ error: 'kennel not existing' })
 
-        const dogs = await kennel.getDogs()
-
-        for (dog of dogs) {
-            updateInKennel(dog.id)
-        }
-
-        await kennel.setDogs([])
-
         await Kennel.destroy({ where: { id: kennelId } })
 
         return res.json(kennel)
