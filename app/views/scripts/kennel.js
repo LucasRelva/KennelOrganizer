@@ -1,8 +1,7 @@
 var kennelForms = document.querySelector('#kennelForm')
 var kennelCards = document.querySelector('.kennelCards')
 
-kennelForms.addEventListener('submit', event => {
-    event.preventDefault()
+async function createKennel() {
 
     const formData = kennelForms.name.value
 
@@ -10,16 +9,14 @@ kennelForms.addEventListener('submit', event => {
         return console.error('Field name was not passed');
     }
 
-    axios.post('/kennel', {
-        name: formData
-    }).then(() => {
-        //todo redirect to all kennels page
-        location.reload()
-    }).catch(err => {
+    try {
+        await axios.post('/kennel', {
+            name: formData
+        })
+    } catch (error) {
         console.log('Error while creatting a new kennel ' + err);
-    })
-
-})
+    }
+}
 
 async function listAllKennels() {
 
@@ -94,6 +91,7 @@ function listKennelDogs(id) {
                 <div class="card-header" style="font-size: 25px">Cachorro</div>
                 <div class="card-body bg-dark ">
                 <h5 class="card-title">${dog.name}</h5>
+                <h5 class="card-title">${dog.behavior}</h5>
                 <p class="card-text">${dog.entryDate}</p>
                 <a href="#" class="btn btn-primary">Ver detalhes</a>           
           </div>`

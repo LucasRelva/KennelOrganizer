@@ -2,7 +2,7 @@ const express = require('express')
 const cors = require('cors')
 const path = require('path')
 const multer = require('multer')
-const port = 8080
+const port = 3333
 
 require('./dbconnection')
 
@@ -20,12 +20,14 @@ nunjucks.configure(path.join(__dirname + '..', '..', '..', 'views'), {
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, path.join(__dirname + '..', '..', '..', 'views', 'images'))
+        cb(null, path.join(__dirname + '..', '..', '..', 'views', 'images/'))
     },
     filename: (req, file, cb) => {
         cb(null, Date.now() + '-' + file.originalname)
     }
 })
+
+console.log('----------------------------' + path.join(__dirname + '..', '..', '..', 'views', 'images'));
 
 const upload = multer({ storage })
 

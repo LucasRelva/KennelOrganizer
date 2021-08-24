@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form class="needs-validation dogForm" id="dogForm" novalidate id="form" action="/dog" method="post" enctype="multipart/form-data">
+                <form class="needs-validation dogForm" id="dogForm" novalidate id="form" enctype="multipart/form-data">
 
                     <div class="form-group ">
                         <label for="name">Nome:</label>
@@ -120,7 +120,7 @@
                     <input type="file" name="image" id="upload-photo" />
 
                     <div class="" style="text-align: right;">
-                        <button class="btn btn-success ml-6" type="submit">Cadastrar</button>
+                        <button class="btn btn-success ml-6" onclick="createDog()">Cadastrar</button>
 
                     </div>
                     

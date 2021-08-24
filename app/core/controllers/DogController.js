@@ -1,4 +1,3 @@
-const { update } = require('../models/Dog')
 const { Op } = require('sequelize')
 const Dog = require('../models/Dog')
 const Kennel = require('../models/Kennel')
@@ -12,12 +11,14 @@ module.exports = {
 
         sharp.cache(false)
 
+
+
         const [type, extension] = file.mimetype.split('/')
         const image = `${Date.now()}-resized.${extension}`
 
         await sharp(file.path).resize(400, 400, {
             fit: 'contain'
-        }).toFile(image)
+        }).toFile(file.destination + image)
 
         fs.unlinkSync(file.path)
 
@@ -97,17 +98,17 @@ module.exports = {
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
-        const kennelName = (await dog.getKennel()).name
+        const kennel = await dog.getKennel()
 
-        if (!kennelName) return res.json({ error: 'This dog is not in a Kennel' })
+        if (!kennel) return res.json({ error: 'This dog is not in a Kennel' })
 
-        return res.json({ kennelName: kennelName })
+        return res.json({ kennelName: kennel.name })
 
     },
 
     async updateDogInfo(req, res) {
         const { dogId } = req.params
-        const { entryDate, name, weight, age, behavior, } = req.body
+        const { entryDate, name, weight, age, behavior, image } = req.body
 
         const dog = await Dog.findByPk(dogId)
 
