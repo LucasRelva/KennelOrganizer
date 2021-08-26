@@ -8,19 +8,19 @@ module.exports = {
     async createDog(req, res) {
         const { name, weight, age, behavior, entryDate } = req.body
         const file = req.file
+        let image = null
 
-        sharp.cache(false)
+        if (file) {
+            sharp.cache(false)
+            const [type, extension] = file.mimetype.split('/')
+            image = `${Date.now()}-resized.${extension}`
 
+            await sharp(file.path).resize(400, 400, {
+                fit: 'contain'
+            }).toFile(file.destination + image)
 
-
-        const [type, extension] = file.mimetype.split('/')
-        const image = `${Date.now()}-resized.${extension}`
-
-        await sharp(file.path).resize(400, 400, {
-            fit: 'contain'
-        }).toFile(file.destination + image)
-
-        fs.unlinkSync(file.path)
+            fs.unlinkSync(file.path)
+        }
 
         const dog = await Dog.create({ name, image, weight, age, behavior, entryDate })
 
@@ -108,13 +108,46 @@ module.exports = {
 
     async updateDogInfo(req, res) {
         const { dogId } = req.params
-        const { entryDate, name, weight, age, behavior, image } = req.body
+        const { entryDate, name, weight, age, behavior } = req.body
+
+        const file = req.file
+
+        console.log('-----------' + file + req.file + req.params, entryDate, name);
 
         const dog = await Dog.findByPk(dogId)
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
+
+        let image = dog.image
+
+        if (file) {
+            sharp.cache(false)
+            if (fs.existsSync(file.destination + image)) {
+                fs.unlinkSync(file.destination + image)
+            }
+
+            const [type, extension] = file.mimetype.split('/')
+            image = `${Date.now()}-resized.${extension}`
+
+            await sharp(file.path).resize(400, 400, {
+                fit: 'contain'
+            }).toFile(file.destination + image)
+
+            fs.unlinkSync(file.path)
+        }
+
         await Dog.update({ behavior, entryDate, name, image, weight, age }, { where: { id: dogId } })
+
+        return res.json(dog)
+    },
+
+    async getDog(req, res) {
+        const { dogId } = req.params
+
+        const dog = await Dog.findByPk(dogId)
+
+        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
         return res.json(dog)
     }
