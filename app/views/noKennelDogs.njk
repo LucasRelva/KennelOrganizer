@@ -1,0 +1,22 @@
+{% extends "layout.njk" %}
+{% set pageId = "all-dogs" %}
+
+{% block content %}
+    {%include "partials/header.njk"%}
+
+    <div id="noKennelDogsGroup" style="display: flex; flex-wrap: wrap; margin: 0 auto; justify-content: center; " >
+        {# <div class="card text-center text-white bg-dark " style="max-width: 14rem; margin: 10px; min-width: 14rem;">
+          <img src="images/1629329732497-resized.jpeg" class="card-img-top" alt="...">
+            <div class="card-header" style="font-size: 25px">Cachorro</div>
+            <div class="card-body bg-dark ">
+            <h5 class="card-title">Comportamento</h5>
+            <p class="card-text">22/22/2222</p>
+            <a href="#" class="btn btn-primary">Ver detalhes</a>            #}
+        </div>
+    </div>
+
+{% endblock content %}
+
+{% block scripts %}
+    <script src="scripts/noKennelDogs.js"></script>
+{% endblock scripts %}

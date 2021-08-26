@@ -16,6 +16,10 @@ routes.get('/allDogs', (req, res) => {
     return res.render('allDogs.njk', { pageTitle: 'TODOS OS CACHORROS' })
 })
 
+routes.get('/noKennelDogs', (req, res) => {
+    return res.render('noKennelDogs.njk', { pageTitle: 'CACHORROS SEM CANIL' })
+})
+
 // Dog routes
 routes.use('/dog', dogRoutes)
 
