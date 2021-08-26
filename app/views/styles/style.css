@@ -119,3 +119,9 @@ label#type-error{
     position: absolute;
     z-index: -1;
  }
+
+ #editImage {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+ }

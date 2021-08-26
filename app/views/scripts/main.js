@@ -28,3 +28,11 @@ $(document).ready(function () {
 $(document).ready(function () {
     $('#date').mask('00/00/0000', { clearIfNotMatch: true })
 })
+
+$(document).ready(function () {
+    $('#editWeight').mask("#0.000", { reverse: true });
+})
+
+$(document).ready(function () {
+    $('#editDate').mask('00/00/0000', { clearIfNotMatch: true })
+})
