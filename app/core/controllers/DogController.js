@@ -112,8 +112,6 @@ module.exports = {
 
         const file = req.file
 
-        console.log('-----------' + file + req.file + req.params, entryDate, name);
-
         const dog = await Dog.findByPk(dogId)
 
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
