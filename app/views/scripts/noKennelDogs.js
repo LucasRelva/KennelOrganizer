@@ -5,6 +5,8 @@ function listNoKennelDogs() {
         data = res.data
         noKennelDogsGroup.innerHTML = ''
 
+        data.reverse()
+
         for (dog of data) {
             noKennelDogsGroup.innerHTML += `
             <div id="${dog.id}" class="card text-center text-white bg-dark " style="max-width: 14rem; margin: 10px; min-width: 14rem;">
@@ -62,7 +64,7 @@ function dogDetailsNoKennel(id) {
         dog = res.data
 
         btns.innerHTML = `
-        <button type="button" class="btn btn-success" id="addBtn" ">Escolher canil</button>
+        <a href="/choose" class="btn btn-success" id="addBtn" onclick="setLocalId(${dog.id})">Escolher canil</a>
         `
 
         modalHeader.innerHTML = `<img src="/images/${dog.image}" class="card-img-top" alt="...">`
@@ -74,6 +76,10 @@ function dogDetailsNoKennel(id) {
     }).catch(err => {
         console.log('Error while showing details' + err);
     })
+}
+
+function setLocalId(id) {
+    localStorage.setItem('dogId', id)
 }
 
 listNoKennelDogs()

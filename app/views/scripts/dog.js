@@ -24,6 +24,8 @@ function listDogs() {
         data = res.data
         dogsGroup.innerHTML = ''
 
+        data.reverse()
+
         for (dog of data) {
             dogsGroup.innerHTML += `
             <div id="${dog.id}" class="card text-center text-white bg-dark " style="max-width: 14rem; margin: 10px; min-width: 14rem;">
@@ -77,7 +79,7 @@ function fillModal(id) {
         behavior.value = data.behavior
         date.value = data.entryDate
 
-        localStorage.setItem('dogId', id);
+        setLocalId(id)
 
     }).catch(err => {
         console.log('Error while filling dog modal ' + err);
@@ -113,23 +115,6 @@ function removeFromKennel(dogId, kennelId) {
     }
 }
 
-function updteDogKennel(dogId, kennelId) {
-    try {
-        axios.put(`/dog/${dogId}/${kennelId}`)
-    } catch (err) {
-        console.log('Error while updating dog kennel ' + err);
-    }
-}
-
-function addToKennel(dogId, kennelID) {
-
-    try {
-        axios.put(`/kennel/addDog/${dogId}/${kennelId}`)
-    } catch (err) {
-        console.log('Error while adding dog tu kennel ' + err);
-    }
-}
-
 function dogDetails(id) {
     const modalHeader = document.querySelector('#header')
     const name = document.querySelector('#dogName')
@@ -152,11 +137,11 @@ function dogDetails(id) {
 
         if (dog.kennelId == null) {
             btns.innerHTML = `
-                <button type="button" class="btn btn-success" id="addBtn" >Escolher canil</button>
+                <a href="/choose" class="btn btn-success" id="addBtn" onclick="setLocalId(${dog.id})">Escolher canil</a>
             `
         } else {
             btns.innerHTML = `
-                <button type="button" class="btn btn-primary " id="chooseBtn" >Alterar canil</button>
+                <a href="/choose" class="btn btn-primary" id="addBtn" onclick="setLocalId(${dog.id})">Alterar canil</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal" id="removeBtn" onclick="removeFromKennel(${dog.id}, ${dog.kennelId})">Remover do canil</button>
             `
         }
@@ -170,6 +155,10 @@ function dogDetails(id) {
     }).catch(err => {
         console.log('Error while showing details' + err);
     })
+}
+
+function setLocalId(id) {
+    localStorage.setItem('dogId', id)
 }
 
 listDogs()

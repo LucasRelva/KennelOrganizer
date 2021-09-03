@@ -12,6 +12,10 @@ routes.get('/', (req, res) => {
     return res.render('main.njk', { pageTitle: 'TODOS OS CANIS' })
 })
 
+routes.get('/choose', (req, res) => {
+    return res.render('main.njk', { pageTitle: 'ESCOLHER CANIL' })
+})
+
 routes.get('/allDogs', (req, res) => {
     return res.render('allDogs.njk', { pageTitle: 'TODOS OS CACHORROS' })
 })
