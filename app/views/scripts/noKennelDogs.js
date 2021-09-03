@@ -21,7 +21,7 @@ function listNoKennelDogs() {
                     </a>
                 </div>
                 <div class="card-footer" style="display: flex; flex-direction: row; justify-content: space-around">
-                    <a href="#" class="btn btn-primary">Ver detalhes</a>
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#dogDetail" onclick="dogDetailsNoKennel(${dog.id})">Ver detalhes</a>
                     <button data-toggle="modal" data-target="#dogEditModal" type="button" class="btn btn-warning" style="margin-rigth: 0" onclick="fillModal(${dog.id})"><img src="https://img.icons8.com/material-outlined/24/000000/edit--v1.png"/></button>
                 </div>
             </div>`
@@ -38,6 +38,41 @@ function deleteNoKennelDog(id) {
         listNoKennelDogs()
     }).catch(err => {
         console.log('Error while deleting a dog ' + err);
+    })
+}
+
+function dogDetailsNoKennel(id) {
+    const modalHeader = document.querySelector('#header')
+    const name = document.querySelector('#dogName')
+    const weight = document.querySelector('#dogWeight')
+    const age = document.querySelector('#dogAge')
+    const behavior = document.querySelector('#dogBehavior')
+    const date = document.querySelector('#dogDate')
+    const btns = document.querySelector('#btns')
+
+    modalHeader.innerHTML = ''
+    name.innerHTML = ''
+    weight.innerHTML = ''
+    age.innerHTML = ''
+    behavior.innerHTML = ''
+    date.innerHTML = ''
+    btns.innerHTML = ''
+
+    axios.get(`/dog/find/` + id).then(res => {
+        dog = res.data
+
+        btns.innerHTML = `
+        <button type="button" class="btn btn-success" id="addBtn" ">Escolher canil</button>
+        `
+
+        modalHeader.innerHTML = `<img src="/images/${dog.image}" class="card-img-top" alt="...">`
+        name.innerHTML = `${dog.name}`
+        weight.innerHTML = `${dog.weight}`
+        age.innerHTML = `${dog.age}`
+        behavior.innerHTML = `${dog.behavior}`
+        date.innerHTML = `${dog.entryDate}`
+    }).catch(err => {
+        console.log('Error while showing details' + err);
     })
 }
 

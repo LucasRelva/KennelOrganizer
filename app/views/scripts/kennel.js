@@ -107,7 +107,7 @@ function listKennelDogs(id) {
                                 2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
                               </svg></a>
                 </div>
-              <a href="#" class="btn btn-primary">Ver detalhes</a>`
+                <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#dogDetail" onclick="dogDetailsKennel(${dog.id})">Ver detalhes</a>`
         }
     })
 
@@ -119,7 +119,7 @@ function deleteKennel(id) {
     if (!confirm('Tem certeza que deseja fazer isso?')) return
 
     axios.delete('/kennel/' + id).then(() => {
-        listAllKennels()
+        listAllKennels(id)
     }).catch(err => {
         console.log('Error while deleting a kennel ' + err);
     })
@@ -133,6 +133,61 @@ function deleteDog(id) {
         listKennelDogs()
     }).catch(err => {
         console.log('Error while deleting a dog ' + err);
+    })
+}
+
+function removeFromKennel(dogId, kennelId) {
+    if (!confirm('Tem certeza que deseja fazer isso?')) return
+
+    try {
+        axios.put(`/kennel/removeDog/${dogId}/${kennelId}`)
+        listKennelDogs(kennelId)
+    } catch (err) {
+        console.log('Error while removing dog from kennel ' + err);
+    }
+}
+
+function updteDogKennel(dogId, kennelId) {
+    try {
+        axios.put(`/dog/${dogId}/${kennelId}`)
+    } catch (err) {
+        console.log('Error while updating dog kennel ' + err);
+    }
+}
+
+function dogDetailsKennel(id) {
+    const modalHeader = document.querySelector('#header')
+    const name = document.querySelector('#dogName')
+    const weight = document.querySelector('#dogWeight')
+    const age = document.querySelector('#dogAge')
+    const behavior = document.querySelector('#dogBehavior')
+    const date = document.querySelector('#dogDate')
+    const btns = document.querySelector('#btns')
+
+    modalHeader.innerHTML = ''
+    name.innerHTML = ''
+    weight.innerHTML = ''
+    age.innerHTML = ''
+    behavior.innerHTML = ''
+    date.innerHTML = ''
+    btns.innerHTML = ''
+
+    axios.get(`/dog/find/` + id).then(res => {
+        dog = res.data
+
+        btns.innerHTML = `
+                <button type="button" class="btn btn-primary " id="chooseBtn" >Alterar canil</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" id="removeBtn" onclick="removeFromKennel(${dog.id}, ${dog.kennelId})">Remover do canil</button>
+            `
+
+        modalHeader.innerHTML = `<img src="/images/${dog.image}" class="card-img-top" alt="...">`
+        name.innerHTML = `${dog.name}`
+        weight.innerHTML = `${dog.weight}`
+        age.innerHTML = `${dog.age}`
+        behavior.innerHTML = `${dog.behavior}`
+        date.innerHTML = `${dog.entryDate}`
+    }).catch(err => {
+        console.log('Error while showing details' + err);
     })
 }
 
