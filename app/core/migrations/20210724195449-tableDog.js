@@ -8,22 +8,22 @@ module.exports = {
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false,
+        allowNull: false
       },
 
       name: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: false
       },
 
       image: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: true
       },
 
       weight: {
         type: Sequelize.FLOAT,
-        allowNull: false,
+        allowNull: false
       },
 
       age: {
@@ -36,9 +36,30 @@ module.exports = {
         allowNull: false
       },
 
+      size: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      sex: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
       entryDate: {
         type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      exitDate: {
+        type: Sequelize.STRING,
+        allowNull: false
+      },
+
+      adopted: {
+        type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
       },
 
       kennelId: {

@@ -8,7 +8,11 @@ class Dog extends Model {
             weight: DataTypes.FLOAT,
             age: DataTypes.INTEGER,
             behavior: DataTypes.STRING,
+            size: DataTypes.STRING,
+            sex: DataTypes.STRING,
             entryDate: DataTypes.STRING,
+            exitDate: DataTypes.STRING,
+            adopted: DataTypes.BOOLEAN,
         }, {
             sequelize,
             tableName: 'dogs'
@@ -16,6 +20,7 @@ class Dog extends Model {
     }
 
     static associate(models) {
+        this.belongsToMany(models.Behavior, { foreignKey: 'dogId', through: 'behaviorDog', as: 'behaviors' })
         this.belongsTo(models.Kennel, { foreignKey: 'kennelId', as: 'Kennel' })
     }
 }
