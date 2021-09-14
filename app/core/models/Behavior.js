@@ -4,7 +4,7 @@ class Behavior extends Model {
     static init(sequelize) {
         super.init({
             name: DataTypes.STRING,
-            is_active: DataTypes.BOOLEAN,
+            isActive: DataTypes.BOOLEAN,
         }, {
             sequelize,
             tableName: 'behaviors',
@@ -16,4 +16,4 @@ class Behavior extends Model {
     }
 }
 
-module.exports = Unity
+module.exports = Behavior

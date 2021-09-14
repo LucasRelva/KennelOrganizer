@@ -6,7 +6,7 @@ const fs = require('fs')
 
 module.exports = {
     async createDog(req, res) {
-        const { name, weight, age, behavior, entryDate } = req.body
+        const { name, weight, age, behavior, size, sex, entryDate, exitDate, adopted } = req.body
         const file = req.file
         let image = null
 
@@ -22,7 +22,7 @@ module.exports = {
             fs.unlinkSync(file.path)
         }
 
-        const dog = await Dog.create({ name, image, weight, age, behavior, entryDate })
+        const dog = await Dog.create({ name, image, weight, age, behavior, size, sex, entryDate, exitDate, adopted })
 
         if (!dog) return res.status(500).json({ error: 'Dog was not created properly' })
 
