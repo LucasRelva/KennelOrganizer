@@ -1,6 +1,7 @@
 const express = require('express')
 const dogRoutes = require('./dog.routes')
-const KennelRoutes = require('./kennel.routes')
+const kennelRoutes = require('./kennel.routes')
+const behaviorRoutes = require('./behavior.routes')
 const upload = require('../config/app')
 const sharp = require('sharp')
 const fs = require('fs')
@@ -28,7 +29,9 @@ routes.get('/noKennelDogs', (req, res) => {
 routes.use('/dog', dogRoutes)
 
 //Kennel ROutes
-routes.use('/kennel', KennelRoutes)
+routes.use('/kennel', kennelRoutes)
 
+//behaviorDogs routes
+routes.use('/behavior', behaviorRoutes)
 
 module.exports = routes
