@@ -29,9 +29,9 @@ module.exports = {
             await dog.addBehavior(behaviorFound)
         }
 
-        const dogbehaviors = await dog.getBehaviors()
+        const dogBehaviors = await dog.getBehaviors()
 
-        return res.json(dogbehaviors)
+        return res.json(dogBehaviors)
     },
 
     async getDogBehaviors(req, res) {
@@ -48,6 +48,7 @@ module.exports = {
 
     async getDogs(req, res) {
         const behaviors = req.body
+        let first = true
         let dogs = []
 
         for (behavior of behaviors) {
@@ -58,20 +59,27 @@ module.exports = {
 
             if (!behaviorFound) return res.status(400).json({ error: "behavior not found" })
 
-            behaviorDogs = await behaviorFound.getDogs()
+            if (first) {
+                const behaviorDogs = await behaviorFound.getDogs()
 
-            dogs.push(behaviorDogs)
+                dogs.push(behaviorDogs)
+
+                first = false
+            } else {
+                flatDogs = dogs.flat()
+
+                for (dog in flatDogs) {
+                    console.log(flatDogs)
+                    const match = await flatDogs[dog].hasBehavior(behaviorFound)
+
+                    if (!match) {
+                        flatDogs.splice(dog)
+                    }
+                }
+            }
         }
 
-        flatDogs = dogs.flat()
-
-        const dogIdArray = Array.from(new Set(flatDogs.map(dog => dog.id)))
-
-        const filteredDogs = dogIdArray.map(id => {
-            return flatDogs.find(dog => dog.id === id)
-        })
-
-        return res.json(filteredDogs)
+        return res.json(flatDogs)
     },
 
     async getBehaviors(req, res) {
