@@ -31,11 +31,6 @@ module.exports = {
         allowNull: false
       },
 
-      behavior: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-
       size: {
         type: Sequelize.STRING,
         allowNull: false
@@ -53,13 +48,13 @@ module.exports = {
 
       exitDate: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: true
       },
 
       adopted: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
-        defaultValue: true
+        defaultValue: false
       },
 
       kennelId: {

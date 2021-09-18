@@ -7,7 +7,6 @@ class Dog extends Model {
             image: DataTypes.STRING,
             weight: DataTypes.FLOAT,
             age: DataTypes.INTEGER,
-            behavior: DataTypes.STRING,
             size: DataTypes.STRING,
             sex: DataTypes.STRING,
             entryDate: DataTypes.STRING,
