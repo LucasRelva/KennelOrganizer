@@ -21,11 +21,13 @@
         </div>
 
         {% block modal %}
+            {%include "partials/behaviorModal.njk"%}
             {%include "partials/dogsModal.njk"%}
             {%include "partials/kennelsModal.njk"%}
             {%include "partials/kennelEditModal.njk"%}
             {%include "partials/dogsEditModal.njk"%}
             {%include "partials/dogsDetailsModal.njk"%}
+            
         {% endblock modal %}
 
         {# bootstrap script #}

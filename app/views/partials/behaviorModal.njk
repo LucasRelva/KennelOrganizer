@@ -1,0 +1,78 @@
+<div class="modal fade" id="behaviorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" style="z-index: 99999999;"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Cadastrar novos comportamentos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input checkbox" value="Sociável com animais"><p>Sociável com animais</p>
+                    </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Sociável com criança"><p>Sociável com criança</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Dócil"><p>Dócil</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Inseguro"><p>Inseguro</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Dominante"><p>Dominante</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Alta energia"><p>Alta energia</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Baixa energia"><p>Baixa energia</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Condicionado"><p>Condicionado</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Não Condicionado"><p>Não Condicionado</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Fugitivo"><p>Fugitivo</p>
+                </label>
+                </div>
+                <div class="form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" class="form-check-input checkbox" value="Condições especiais"><p>Condições especiais</p>
+                </label>
+                </div>
+
+                <div class="behavior-confirm" style="text-align: center;">
+                    <button class="btn btn-success ml-6" data-dismiss="modal" onclick="addBehavior()">Escolher</button>
+                </div>
+
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+    <script src="scripts/kennel.js"></script>
+    <script src="scripts/dog.js"></script>
+{% endblock scripts %}
