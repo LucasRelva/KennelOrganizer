@@ -2,22 +2,36 @@ var dogForm = document.querySelector('.dogForm')
 var dogsGroup = document.querySelector('#dogsGroup')
 var dogEditForm = document.querySelector('#dogEditForm')
 
-function createDog() {
+async function createDog() {
     const formData = new FormData(dogForm)
 
+    var name = $('#name').val()
+    var weight = $('#weight').val()
+    var age = $('#age').val()
+    var size = $('#size').val()
+    var sex = $('#sex').val()
+    var date = $('#date').val()
+
+    if (!name || !weight || !age || !size || !sex || !date) {
+        return
+    }
+
     try {
-        axios.post('/dog', formData, {
+        res = await axios.post('/dog', formData, {
             headers: {
                 'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
             }
         })
 
-    } catch (error) {
+        dogId = res.data.id
+
+        await sendbehaviors(dogId)
+
+    } catch (err) {
         console.log('Error while creating a new dog ' + err);
     }
 
 }
-
 
 function listDogs() {
     axios.get('/dog').then(res => {
@@ -50,6 +64,12 @@ function listDogs() {
     }).catch(err => {
         console.log('Error while listing a dog ' + err);
     })
+}
+
+async function sendbehaviors(dogId) {
+    const behaviors = behaviorsParse()
+
+    await axios.put('/behavior/add/' + dogId, behaviors)
 }
 
 
@@ -161,5 +181,36 @@ function setLocalId(id) {
     localStorage.setItem('dogId', id)
 }
 
-listDogs()
+function setLocalbehaviors(behaviors) {
+    return localStorage.setItem('behaviors', JSON.stringify(behaviors))
+}
 
+function getLocalbehaviors() {
+    return JSON.parse(localStorage.getItem('behaviors'))
+}
+
+async function addBehavior() {
+    const checkboxes = $('.checkbox')
+    let behaviors = []
+
+    for (check of checkboxes) {
+        if (check.checked) {
+            behaviors.push(check.value)
+        }
+    }
+    await setLocalbehaviors(behaviors)
+
+}
+
+function behaviorsParse() {
+    const behaviors = getLocalbehaviors()
+    let finalBehaviors = []
+
+    for (behavior of behaviors) {
+        finalBehaviors.push({ 'name': behavior })
+    }
+
+    return finalBehaviors
+}
+
+listDogs()

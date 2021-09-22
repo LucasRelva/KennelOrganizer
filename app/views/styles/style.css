@@ -137,3 +137,16 @@ label#type-error{
     width: 80%;
     height: 53.2px;
  }
+
+ .form-check {
+     margin: auto;
+ }
+ 
+ .form-check-label input {
+    width: 20px;
+    height: 20px;
+ }
+
+.behavior-confirm {
+    margin: 15px;
+}
