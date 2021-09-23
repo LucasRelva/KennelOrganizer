@@ -4,9 +4,6 @@ const Dog = require('../models/Dog')
 const { findAll } = require('../models/Kennel')
 const GeneralController = require('../controllers/GeneralController')
 
-
-// tratar req.bodies para receber somente o nome dos comportamentos
-
 module.exports = {
     async addBehavior(req, res) {
         const { dogId } = req.params
@@ -17,6 +14,8 @@ module.exports = {
         const dog = await Dog.findByPk(dogId)
 
         if (!dog) return res.status(400).json({ error: "dog not found" })
+
+        await dog.setBehaviors([])
 
         for (behavior of behaviors) {
 
