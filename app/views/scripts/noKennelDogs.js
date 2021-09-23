@@ -1,19 +1,35 @@
 const noKennelDogsGroup = document.querySelector('#noKennelDogsGroup')
 
-function listNoKennelDogs() {
-    axios.get('/dog/noKennel').then(res => {
+async function listNoKennelDogs() {
+    try {
+
+        const res = await axios.get('/dog/noKennel')
         data = res.data
         noKennelDogsGroup.innerHTML = ''
 
         data.reverse()
 
         for (dog of data) {
+            behaviorsHTML = ''
+            const behaviorRes = await axios.get('/behavior/' + dog.id)
+            const behaviors = behaviorRes.data
+
+            if (behaviors.length > 0) {
+                for (behavior in behaviors) {
+                    if (behavior == 2) break
+
+                    behaviorsHTML += `<p>${behaviors[behavior].name} <br></p>`
+                }
+            } else {
+                behaviorsHTML = '<p><i> Sem comportamentos cadastrados </i></p>'
+            }
+
             noKennelDogsGroup.innerHTML += `
             <div id="${dog.id}" class="card text-center text-white bg-dark " style="max-width: 14rem; margin: 10px; min-width: 14rem;">
                 <img src="/images/${dog.image}" class="card-img-top" alt="...">
                 <div class="card-header" style="font-size: 25px">${dog.name}</div>
                 <div class="card-body bg-dark ">
-                    <h5 class="card-title">${dog.behavior}</h5>
+                    <p class="card-title">${behaviorsHTML}</p>
                     <p class="card-text">${dog.entryDate}</p>
                     <a href ='#' onclick='deleteNoKennelDog(${dog.id})' class = 'trash-icon'> 
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash text-danger" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style = 'font-size: 20px;'>
@@ -28,9 +44,10 @@ function listNoKennelDogs() {
                 </div>
             </div>`
         }
-    }).catch(err => {
+
+    } catch (err) {
         console.log('Error while listing a dog ' + err);
-    })
+    }
 }
 
 function deleteNoKennelDog(id) {
@@ -43,12 +60,12 @@ function deleteNoKennelDog(id) {
     })
 }
 
-function dogDetailsNoKennel(id) {
+async function dogDetailsNoKennel(id) {
     const modalHeader = document.querySelector('#header')
     const name = document.querySelector('#dogName')
     const weight = document.querySelector('#dogWeight')
     const age = document.querySelector('#dogAge')
-    const behavior = document.querySelector('#dogBehavior')
+    const behaviorElement = document.querySelector('#dogBehavior')
     const date = document.querySelector('#dogDate')
     const btns = document.querySelector('#btns')
 
@@ -56,14 +73,30 @@ function dogDetailsNoKennel(id) {
     name.innerHTML = ''
     weight.innerHTML = ''
     age.innerHTML = ''
-    behavior.innerHTML = ''
+    behaviorElement.innerHTML = ''
     date.innerHTML = ''
     btns.innerHTML = ''
+    behaviorsHTML = ''
 
-    axios.get(`/dog/find/` + id).then(res => {
+    setLocalId(id)
+
+    try {
+        const behaviorRes = await axios.get('/behavior/' + id)
+        const res = await axios.get(`/dog/find/` + id)
+
+        const behaviors = behaviorRes.data
         dog = res.data
 
+        if (behaviors.length > 0) {
+            for (behavior in behaviors) {
+                behaviorsHTML += `<li class="list-group-item list-group-item-dark">${behaviors[behavior].name}</li> `
+            }
+        } else {
+            behaviorsHTML = '<p><i> Sem comportamentos cadastrados </i></p>'
+        }
+
         btns.innerHTML = `
+        <a data-toggle="modal" data-target="#behaviorModal" class="btn btn-info ml-6" style="color: white; margin-bottom: 5px;" >Escolher comportamentos</a>
         <a href="/choose" class="btn btn-success" id="addBtn" onclick="setLocalId(${dog.id})">Escolher canil</a>
         `
 
@@ -71,11 +104,13 @@ function dogDetailsNoKennel(id) {
         name.innerHTML = `${dog.name}`
         weight.innerHTML = `${dog.weight}`
         age.innerHTML = `${dog.age}`
-        behavior.innerHTML = `${dog.behavior}`
+        behaviorElement.innerHTML = `${behaviorsHTML}`
         date.innerHTML = `${dog.entryDate}`
-    }).catch(err => {
-        console.log('Error while showing details' + err);
-    })
+
+    } catch (err) {
+        console.log('Error while showing noKennel details' + err);
+    }
+
 }
 
 function setLocalId(id) {
