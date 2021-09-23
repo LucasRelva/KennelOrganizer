@@ -150,3 +150,8 @@ label#type-error{
 .behavior-confirm {
     margin: 15px;
 }
+
+.behaviorList {
+    justify-content: center;
+    text-align: center;
+}
