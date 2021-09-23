@@ -12,7 +12,7 @@ module.exports = {
 
         if (file) {
             sharp.cache(false)
-            const [type, extension] = file.mimetype.split('/')
+            const [type, extension] = await file.mimetype.split('/')
             image = `${Date.now()}-resized.${extension}`
 
             await sharp(file.path).resize(400, 400, {
