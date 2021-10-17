@@ -10,19 +10,27 @@ const routes = express.Router()
 
 //frontEnd render routes
 routes.get('/', (req, res) => {
-    return res.render('main.njk', { pageTitle: 'TODOS OS CANIS' })
+    return res.render('main.njk', { pageTitle: 'Kennel Organizer' })
 })
 
 routes.get('/choose', (req, res) => {
-    return res.render('main.njk', { pageTitle: 'ESCOLHER CANIL' })
+    return res.render('main.njk', { pageTitle: 'Escolha o canil' })
 })
 
 routes.get('/allDogs', (req, res) => {
-    return res.render('allDogs.njk', { pageTitle: 'TODOS OS CACHORROS' })
+    return res.render('allDogs.njk', { pageTitle: 'Todos os cachorros presentes' })
 })
 
 routes.get('/noKennelDogs', (req, res) => {
-    return res.render('noKennelDogs.njk', { pageTitle: 'CACHORROS SEM CANIL' })
+    return res.render('noKennelDogs.njk', { pageTitle: 'Cachorros sem canil' })
+})
+
+routes.get('/adoptedDogs', (req, res) => {
+    return res.render('allDogs.njk', { pageTitle: 'Cachorros adoatdos' })
+})
+
+routes.get('/outerDogs', (req, res) => {
+    return res.render('allDogs.njk', { pageTitle: 'Cachorros ausentes' })
 })
 
 // Dog routes
