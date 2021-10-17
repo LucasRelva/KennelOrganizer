@@ -192,6 +192,8 @@ async function dogDetailsKennel(id) {
     const name = document.querySelector('#dogName')
     const weight = document.querySelector('#dogWeight')
     const age = document.querySelector('#dogAge')
+    const size = document.querySelector('#dogSize')
+    const sex = document.querySelector('#dogSex')
     const behaviorElement = document.querySelector('#dogBehavior')
     const date = document.querySelector('#dogDate')
     const btns = document.querySelector('#btns')
@@ -200,6 +202,8 @@ async function dogDetailsKennel(id) {
     name.innerHTML = ''
     weight.innerHTML = ''
     age.innerHTML = ''
+    size.innerHTML = ''
+    sex.innerHTML = ''
     behaviorElement.innerHTML = ''
     date.innerHTML = ''
     btns.innerHTML = ''
@@ -223,15 +227,19 @@ async function dogDetailsKennel(id) {
         }
 
         btns.innerHTML = `
-             <a href="/choose" class="btn btn-primary" style="margin-bottom: 5px;" id="addBtn" onclick="setLocalId(${dog.id})">Alterar canil</a>
-             <a data-toggle="modal" data-target="#behaviorModal" class="btn btn-info ml-6" style="color: white; margin-bottom: 5px;" >Escolher comportamentos</a>
-            <button type="button" class="btn btn-danger" data-dismiss="modal" id="removeBtn" onclick="removeFromKennel(${dog.id}, ${dog.kennelId})">Remover do canil</button>
+            <a href="/choose" class="btn btn-primary" style="margin-bottom: 5px;" id="addBtn" onclick="setLocalId(${dog.id})">Alterar canil</a>
+            <a data-toggle="modal" data-target="#behaviorModal" class="btn btn-info ml-6" style="color: white; margin-bottom: 5px;" >Escolher comportamentos</a>
+            <button type="button" class="btn btn-danger" style="color: white; margin-bottom: 5px;" data-dismiss="modal" id="removeBtn" onclick="removeFromKennel(${dog.id}, ${dog.kennelId})">Remover do canil</button>
+            <a href="/adoptedDogs" class="btn btn-warning" style="color: white; margin-bottom: 5px;"" id="adoptedBtn" onclick="adoptedStatus(${dog.id})">Adotar</a>
+            <a href="/outerDogs" class="btn btn-secondary" style="color: white; margin-bottom: 5px;" id="outerBtn" onclick="outerStatus(${dog.id})">Marcar como ausente</a>
             `
 
         modalHeader.innerHTML = `<img src="/images/${dog.image}" class="card-img-top" alt="...">`
         name.innerHTML = `${dog.name}`
         weight.innerHTML = `${dog.weight}`
         age.innerHTML = `${dog.age}`
+        size.innerHTML = `${dog.size}`
+        sex.innerHTML = `${dog.sex}`
         behaviorElement.innerHTML = `${behaviorsHTML}`
         date.innerHTML = `${dog.entryDate}`
 

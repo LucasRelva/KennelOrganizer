@@ -155,3 +155,12 @@ label#type-error{
     justify-content: center;
     text-align: center;
 }
+
+#btns {
+    display:flex !important; 
+    flex-direction: column;
+}
+
+.modal-footer {
+    justify-content: center;
+}

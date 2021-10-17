@@ -30,7 +30,11 @@ module.exports = {
     },
 
     async listAllDogs(req, res) {
-        const dogs = await Dog.findAll()
+        const dogs = await Dog.findAll({
+            where: {
+                exitDate: null
+            }
+        })
 
         if (!dogs) return res.status(204).json({ error: 'No Dogs were found' })
 
@@ -52,7 +56,8 @@ module.exports = {
     async listNoKennelDogs(req, res) {
         const dogs = await Dog.findAll({
             where: {
-                kennelId: null
+                kennelId: null,
+                exitDate: null
             }
         })
 
@@ -148,5 +153,75 @@ module.exports = {
         if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
 
         return res.json(dog)
-    }
+    },
+
+    async adoptedDogs(req, res) {
+        const { dogId } = req.params
+        const date = new Date()
+
+        const dog = await Dog.findByPk(dogId)
+
+        if (!dog) return res.status(204).json({ error: 'No adopted dog was found with the id: ' + dogId })
+
+        if (!dog.adopted) {
+            await Dog.update({ adopted: true, exitDate: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` }, { where: { id: dogId } })
+            await dog.setKennel(null)
+
+        } else {
+            await Dog.update({ adopted: false, exitDate: null }, { where: { id: dogId } })
+            await dog.setKennel(null)
+
+        }
+
+        return res.json(dog)
+
+    },
+
+    async outerDogs(req, res) {
+        const { dogId } = req.params
+        const date = new Date()
+
+        const dog = await Dog.findByPk(dogId)
+
+        if (!dog) return res.status(204).json({ error: 'No dog was found with the id: ' + dogId })
+
+        dog.setKennel(null)
+
+        if (dog.exitDate) {
+            await dog.update({ exitDate: null }, { where: { id: dogId } })
+
+            return res.json(dog)
+        }
+
+        await dog.update({ exitDate: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}` }, { where: { id: dogId } })
+
+        return res.json(dog)
+    },
+
+    async getAdoptedDogs(req, res) {
+        const dogs = await Dog.findAll({
+            where: {
+                adopted: true
+            }
+        })
+
+        if (!dogs) return res.status(204).json({ error: 'No adopted dogs was found with the id: ' + dogId })
+
+        return res.json(dogs)
+    },
+
+    async getOuterDogs(req, res) {
+        const dogs = await Dog.findAll({
+            where: {
+                adopted: false,
+                exitDate: {
+                    [Op.ne]: null
+                }
+            }
+        })
+
+        if (!dogs) return res.status(204).json({ error: 'No dog was found: ' + dogId })
+
+        return res.json(dogs)
+    },
 }

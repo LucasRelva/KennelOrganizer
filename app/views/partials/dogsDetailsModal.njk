@@ -1,10 +1,12 @@
 <div class="modal fade" id="dogDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
+        <div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span style="margin-right: 5px; " aria-hidden="true">&times;</span>
+            </button>
+        </div>
         <div class="modal-header" id="header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
             <div class="form-group icon-input">
@@ -46,6 +48,21 @@
                 <h5 id="dogAge"> </h5>
             </div>
 
+             <div class="form-group icon-input">
+                <div class="icon-input name-icon icon-background ">
+                    <img src="https://img.icons8.com/ios-filled/32/000000/ruler.png"/>                
+                </div>
+                <h5 id="dogSize"></h5>
+            </div>
+
+
+             <div class="form-group icon-input">
+                <div class="icon-input name-icon icon-background ">
+                    <img src="https://img.icons8.com/windows/32/000000/transgender.png"/>
+                </div>
+                <h5 id="dogSex"></h5>
+            </div>
+
             <div class="form-group icon-input">
                 <div class="icon-input name-icon icon-background ">
                     <svg version="1.1"id="Icons" width="1.2em" height="1em" class="bi" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24"><defs><style>.cls-1{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}</style></defs><title>68.calendar</title><g id="_68.calendar" data-name="68.calendar"><rect class="cls-1" x="1" y="3" width="22" height="20" rx="3" ry="3"/><line class="cls-1" x1="1" y1="9" x2="23" y2="9"/><line class="cls-1" x1="12" y1="5" x2="12" y2="1"/><line class="cls-1" x1="6" y1="5" x2="6" y2="1"/><line class="cls-1" x1="18" y1="5" x2="18" y2="1"/><line class="cls-1" x1="5" y1="14" x2="7" y2="14"/><line class="cls-1" x1="11" y1="14" x2="13" y2="14"/><line class="cls-1" x1="17" y1="14" x2="19" y2="14"/><line class="cls-1" x1="5" y1="18" x2="7" y2="18"/><line class="cls-1" x1="11" y1="18" x2="13" y2="18"/><line class="cls-1" x1="17" y1="18" x2="19" y2="18"/></g></svg>
@@ -60,14 +77,13 @@
             </div>
 
 
-        <div class="modal-footer">
-        <div id="btns">
-            {# <button type="button" class="btn btn-primary " id="chooseBtn" >Alterar canil</button>
-            <button type="button" class="btn btn-danger" id="removeBtn" >Remover do canil</button>
-            <button type="button" class="btn btn-success" id="addBtn" style="display: none;">Escolher canil</button> #}
-        </div>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-        </div>
+            <div class="modal-footer">
+                <div id="btns">
+                    {# <button type="button" class="btn btn-primary " id="chooseBtn" >Alterar canil</button>
+                    <button type="button" class="btn btn-danger" id="removeBtn" >Remover do canil</button>
+                    <button type="button" class="btn btn-success" id="addBtn" style="display: none;">Escolher canil</button> #}
+                </div>
+            </div>
         </div>
     </div>
 </div>
