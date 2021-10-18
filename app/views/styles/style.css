@@ -164,3 +164,11 @@ label#type-error{
 .modal-footer {
     justify-content: center;
 }
+
+.filterHeader {
+    text-align: center;
+}
+
+.form-check-label {
+    margin-right: 10px;
+}

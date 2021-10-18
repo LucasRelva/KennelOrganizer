@@ -46,9 +46,11 @@ module.exports = {
     },
 
     async getDogs(req, res) {
+        const { type } = req.params
         const behaviors = req.body
         let first = true
         let dogs = []
+        let behaviorDogs
 
         for (behavior of behaviors) {
 
@@ -59,7 +61,35 @@ module.exports = {
             if (!behaviorFound) return res.status(400).json({ error: "behavior not found" })
 
             if (first) {
-                const behaviorDogs = await behaviorFound.getDogs()
+
+                if (type == 1) {
+                    behaviorDogs = await behaviorFound.getDogs({
+                        where: { exitDate: null }
+                    })
+                }
+
+                if (type == 2) {
+                    behaviorDogs = await behaviorFound.getDogs({
+                        where: { adopted: true }
+                    })
+                }
+
+                if (type == 3) {
+                    behaviorDogs = await behaviorFound.getDogs({
+                        where: {
+                            adopted: false,
+                            exitDate: {
+                                [Op.not]: null
+                            }
+                        }
+                    })
+                }
+
+                if (type == 4) {
+                    behaviorDogs = await behaviorFound.getDogs({
+                        where: { exitDate: null, kennelId: null }
+                    })
+                }
 
                 dogs.push(behaviorDogs)
 
@@ -68,7 +98,6 @@ module.exports = {
                 flatDogs = dogs.flat()
 
                 for (dog in flatDogs) {
-                    console.log(flatDogs)
                     const match = await flatDogs[dog].hasBehavior(behaviorFound)
 
                     if (!match) {
