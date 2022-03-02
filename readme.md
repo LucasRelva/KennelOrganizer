@@ -26,9 +26,9 @@ kennelOrganizer uses a lot of cool technologies!
   - Dotenv: ^10.0.0
   - Nunjucks: ^3.2.3
 
-# Dependencies and their versions
+# Commands and steps to make it work
   - yarn sequelize db:seed:all
-    - Run the seeds of the behaviors
+    - Run the behaviors seeds
   - yarn || npm install
     - Install the depences
   - npm run dev || yarn dev
