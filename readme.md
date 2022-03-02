@@ -27,10 +27,10 @@ kennelOrganizer uses a lot of cool technologies!
   - Nunjucks: ^3.2.3
 
 # Dependencies and their versions
-  -yarn sequelize db:seed:all
-    -Run the seeds of the behariors
-  -yarn || npm install
-    -Install the depences
+  - yarn sequelize db:seed:all
+    - Run the seeds of the behaviors
+  - yarn || npm install
+    - Install the depences
   - npm run dev || yarn dev
     - run server in localhost
   - npx sequelize db:create || yarn sequelize db:create
@@ -38,7 +38,7 @@ kennelOrganizer uses a lot of cool technologies!
   - npx sequelize db:migrate || yarn sequelize db:migrate
     - Execute the migrations
    
-  -Fill .Env file with MySql infomation.
+  - Fill .Env file with your MySql infomation.
 
 # Video Demo:
   - https://youtu.be/q82wepTcld0
