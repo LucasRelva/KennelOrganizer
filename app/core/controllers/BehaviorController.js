@@ -51,6 +51,7 @@ module.exports = {
         let first = true
         let dogs = []
         let behaviorDogs
+        let flatDogs = []
 
         for (behavior of behaviors) {
 
